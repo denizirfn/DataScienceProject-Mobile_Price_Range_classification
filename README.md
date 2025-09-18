@@ -81,7 +81,10 @@ Model: Destek Vektör Makineleri (SVM) kullanıldı.
 Sonuç: Test doğruluğu %82.
 
 📊 Karmaşıklık Matrisi
+
 <img width="683" height="581" alt="image" src="https://github.com/user-attachments/assets/8693200e-b4d8-4024-a4b4-da8f6688b55b" />
+
+
 📑 Sınıflandırma Raporu
               precision    recall  f1-score   support
            0       0.90      1.00      0.95        57
@@ -92,6 +95,9 @@ Sonuç: Test doğruluğu %82.
     accuracy                           0.82       240
    macro avg       0.82      0.82      0.82       240
 weighted avg       0.82      0.82      0.82       240
+
+
+
 
 🚀 Kullanılan Teknolojiler
 
@@ -105,6 +111,7 @@ Scikit-learn (sklearn) → Makine öğrenimi, veri ön işleme, modelleme
 
 Seaborn & Matplotlib → Görselleştirme ve korelasyon analizleri
 
+
 🔮 Gelecek Çalışmalar
 
 SVM için farklı kernel türleri (rbf, poly) ve C parametresi optimizasyonu
@@ -112,6 +119,7 @@ SVM için farklı kernel türleri (rbf, poly) ve C parametresi optimizasyonu
 Gradient Boosting veya XGBoost gibi algoritmaların denenmesi
 
 Performansı düşük sınıflar için Veri Artırma (Data Augmentation) yöntemleri
+
 
 🤝 Katkıda Bulunma
 
