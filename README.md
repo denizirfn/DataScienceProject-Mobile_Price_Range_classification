@@ -1,117 +1,122 @@
-# 📱 Mobile Phone Price Range Prediction 📈
+📱 Mobile Phone Price Range Prediction 📈
 
-Bu proje, mobil telefonların özelliklerine dayanarak **fiyat aralıklarını tahmin etmeyi** amaçlamaktadır.  
-Doğrudan gerçek fiyat tahmini yapmak yerine, telefonun hangi fiyat aralığına (düşük, orta, yüksek, çok yüksek) girdiğini belirleyen bir sınıflandırma modeli geliştirilmiştir.
+Bu proje, mobil telefonların özelliklerine dayanarak fiyat aralıklarını tahmin etmek için çeşitli sınıflandırma modelleri geliştirmeyi amaçlamaktadır. Gerçek fiyat tahmini yerine, telefonların hangi fiyat aralığında (düşük, orta, yüksek, çok yüksek maliyet) yer aldığını belirleyen bir sınıflandırma modeli sunulmuştur.
 
----
+🌟 Proje Özeti
 
-## 🌟 Proje Özeti
+Mobil telefon pazarının dinamik yapısı göz önüne alındığında, telefonların fiyat aralığını doğru tahmin etmek hem tüketiciler hem de üreticiler için önemlidir. Bu çalışmada:
 
-Mobil telefon pazarının dinamik yapısı göz önüne alındığında, bir telefonun fiyat aralığını doğru tahmin etmek **hem tüketiciler hem de üreticiler için önemli**dir.  
-Bu çalışma, **Python** ve güçlü makine öğrenimi kütüphaneleri kullanılarak, mobil cihaz özelliklerinden fiyat aralığı tahmini yapan sağlam bir sınıflandırma modeli sunmaktadır.
+Python ve güçlü makine öğrenimi kütüphaneleri kullanılarak,
 
----
+Mobil cihaz özelliklerinden fiyat aralığı tahmini yapan,
 
-## ✨ Temel Özellikler ve Uygulanan Adımlar
+Sağlam ve güvenilir bir sınıflandırma modeli geliştirilmiştir.
 
-### 1. Veri Yükleme ve Genel Bakış
+✨ Çalışma Adımları ve Temel Özellikler
+1️⃣ Veri Yükleme ve Genel İnceleme
 
-- Veri seti **Pandas** kullanılarak bir DataFrame’e yüklendi.  
-- Veri setinin ilk 5 satırı, boyutu ve veri tipleri incelendi.  
+Pandas ile veri seti DataFrame’e yüklendi.
 
-![DataFrame Overview](https://github.com/user-attachments/assets/df20f533-9f7c-4844-81a9-d69fdfb8d31f)
+İlk 5 satır, boyutlar ve veri tipleri incelendi.
 
----
+<img width="495" height="574" alt="image" src="https://github.com/user-attachments/assets/df20f533-9f7c-4844-81a9-d69fdfb8d31f" />
+2️⃣ Veri Keşfi ve Görselleştirme (EDA)
 
-### 2. Veri Görselleştirme (EDA)
+📊 Countplot Analizi
 
-- **Countplot Grafikleri:** Kategorik değişkenlerin dağılımları incelendi.  
+Kategorik değişkenlerin (örn: Bluetooth, 3G, 4G, dokunmatik ekran, çift SIM, WiFi, çekirdek sayısı, fiyat aralığı) dağılımları incelendi.
 
-![countplot1](https://github.com/user-attachments/assets/f4ae8a21-ffe5-4f7a-81bc-b403a80b56b4)  
-![countplot2](https://github.com/user-attachments/assets/a557c4ca-f554-4966-a3be-d5efe2245ec4)
+<img width="465" height="301" alt="image" src="https://github.com/user-attachments/assets/f4ae8a21-ffe5-4f7a-81bc-b403a80b56b4" />
 
-- **Histogram Grafikleri:** Sayısal değişkenlerin dağılımları gözlemlendi. Özellikle `px_height` ve `swidth` değişkenlerinde sıfır değerler dikkat çekti.  
+Genel Çıkarımlar:
 
-![histogram](https://github.com/user-attachments/assets/772e1baf-2a2e-4a45-9fab-c18ebe8f208a)
+px_height ve sc_width değişkenlerinde 0 değerler mevcut (hatalı).
 
-- **Boxplot Grafikleri:** Özelliklerin hedef değişken (`price_range`) ile ilişkisi analiz edildi.  
+fcamera değişkeninde aykırı değerler var.
 
-![boxplot1](https://github.com/user-attachments/assets/e8a3e582-9b54-4a7f-84e4-47c270c80077)
+Fiyat aralıkları dengeli dağıtılmıştır (her sınıf eşit sayıda).
 
-**Genel Çıkarımlar:**
-- `px_height` ve `swidth`’de 0 değerler hatalı olabilir.  
-- Mobil telefonlar, fiyat aralığı sınıflarına dengeli şekilde dağılmıştır.  
-- Çoğu telefon **Bluetooth, 4G, dokunmatik ekran, Wifi** gibi özelliklere sahiptir.  
-- Büyük çoğunluk **3G** desteğine sahiptir.
+3G desteği çoğu cihazda mevcut, diğer özellikler (4G, WiFi, Bluetooth) de benzer oranlarda.
 
----
+📊 Histogram Analizi
 
-### 3. Korelasyon Analizi
+Numerik değişkenler incelendi, özellikle px_height ve sc_width değişkenlerinde sıfır değerler dikkat çekti.
 
-- Özellikler arasındaki ilişkiler ve hedef değişken ile korelasyonlar incelendi.  
-- Başlangıçta zayıf ilişkiler gözlemlendi.  
+<img width="597" height="650" alt="image" src="https://github.com/user-attachments/assets/772e1baf-2a2e-4a45-9fab-c18ebe8f208a" />
 
-![correlation](https://github.com/user-attachments/assets/633ffa82-d2d3-4f00-a769-18e18b3bc691)
+📊 Boxplot Analizi
 
----
+battery, px_height, px_width → fiyat aralığı üzerinde güçlü etkiye sahip.
 
-### 4. Veri Ön İşleme ve Özellik Mühendisliği
+<img width="366" height="470" alt="image" src="https://github.com/user-attachments/assets/c0bdafc7-43eb-4b52-a035-8eb717f439ab" />
+3️⃣ Korelasyon Analizi
 
-- **Hatalı Değerler:** `px_height` ve `swidth`’deki 0 değerler medyan ile dolduruldu.  
-- **Aykırı Değer Analizi:** `outlier_thresholds` ve `replace_with_thresholds` fonksiyonları kullanıldı.  
+Korelasyon matrisi oluşturuldu.
 
-![outlier_handling](https://github.com/user-attachments/assets/073773ab-3c90-4bc7-ba4b-32439f8984e2)
+Genel olarak zayıf ilişkiler olsa da ram, battery, px_width öne çıktı.
 
-- **Yeni Özellik (`ram`):** `price_range` ile pozitif ilişkiye sahip yeni bir özellik oluşturuldu.  
+<img width="565" height="607" alt="image" src="https://github.com/user-attachments/assets/633ffa82-d2d3-4f00-a769-18e18b3bc691" />
+4️⃣ Veri Ön İşleme & Özellik Mühendisliği
 
-![feature_engineering](https://github.com/user-attachments/assets/9cbaae22-c20f-4c88-bf16-80175e6e70b0)
+Hatalı Değer Düzeltme: px_height ve sc_width → medyan ile dolduruldu.
 
-- **Veri Standartlaştırma:** Tüm kategorik değişkenler sayısal formatta olduğundan dummy encoding gerekmedi. `StandardScaler` ile standartlaştırıldı.
+Aykırı Değer İşleme: outlier_thresholds ve replace_with_thresholds fonksiyonları ile baskılama yapıldı.
 
----
+Yeni Özellik: ram değişkeni hedef değişkenle güçlü korelasyona sahip olduğundan vurgulandı.
 
-### 5. Modelleme ve Değerlendirme
+<img width="847" height="529" alt="image" src="https://github.com/user-attachments/assets/9cbaae22-c20f-4c88-bf16-80175e6e70b0" />
 
-- **Veri Bölme:** %80 eğitim, %20 test.  
-- **Model:** Destek Vektör Makineleri (SVM) kullanıldı.  
-- **Performans:** Test veri setinde **%82 doğruluk** elde edildi.  
+Standartlaştırma: StandardScaler ile tüm veriler ölçeklendirildi.
 
-- **Karmaşıklık Matrisi:**  
+5️⃣ Modelleme ve Değerlendirme
 
-![confusion_matrix](https://github.com/user-attachments/assets/8693200e-b4d8-4024-a4b4-da8f6688b55b)
+Veri Bölme: Eğitim (%80) – Test (%20).
 
-- **Sınıflandırma Raporu:**
-```text
+Model: Destek Vektör Makineleri (SVM). Gürültülü verilere karşı sağlamlığı nedeniyle tercih edildi.
+
+Sonuçlar:
+
+Test doğruluğu: %82
+
+Karmaşıklık Matrisi:
+
+<img width="683" height="581" alt="image" src="https://github.com/user-attachments/assets/8693200e-b4d8-4024-a4b4-da8f6688b55b" />
+
+📑 Sınıflandırma Raporu:
+
               precision    recall  f1-score   support
-0             0.90      1.00      0.95        57
-1             0.76      0.85      0.80        55
-2             0.68      0.66      0.67        59
-3             0.91      0.77      0.83        69
-accuracy                           0.82       240
-macro avg       0.82      0.82      0.82       240
-weighted avg    0.82      0.82      0.82       240
+           0       0.90      1.00      0.95        57
+           1       0.76      0.85      0.80        55
+           2       0.68      0.66      0.67        59
+           3       0.91      0.77      0.83        69
+    accuracy                           0.82       240
+   macro avg       0.82      0.82      0.82       240
+weighted avg       0.82      0.82      0.82       240
 
 🚀 Kullanılan Teknolojiler
 
 Python
 
-Pandas: Veri manipülasyonu ve analizi
+Pandas → Veri manipülasyonu
 
-NumPy: Sayısal işlemler
+NumPy → Sayısal işlemler
 
-Scikit-learn: Makine öğrenimi, veri ön işleme ve değerlendirme
+Scikit-learn → Modelleme ve değerlendirme
 
-Seaborn & Matplotlib: Veri görselleştirme
+Matplotlib & Seaborn → Görselleştirme
 
 🔮 Gelecek Çalışmalar
 
-Farklı SVM kernel türleri (rbf, poly) ve C parametresi optimizasyonu
+SVM için farklı kernel türleri (RBF, Poly) ve C parametresi optimizasyonu.
 
-Gradient Boosting / XGBoost gibi farklı algoritmaların denenmesi
+Gradient Boosting, XGBoost gibi farklı algoritmaların test edilmesi.
 
-Performansı düşük sınıflar için Veri Artırma (Data Augmentation) uygulanması
+Performansı düşük sınıflar için veri artırma (Data Augmentation) teknikleri.
 
 🤝 Katkıda Bulunma
 
-Projeyi geliştirmek için her türlü katkıya açığız!
-Lütfen bir issue açın veya pull request gönderin.
+Projeyi geliştirmek için katkılarınızı bekliyoruz!
+
+Yeni fikirler için issue açabilirsiniz.
+
+Kod geliştirmeleri için pull request gönderebilirsiniz.
